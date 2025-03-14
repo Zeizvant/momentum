@@ -6,7 +6,7 @@ import DetailedTask from './pages/DetailedTask';
 
 export default function App() {
     return (
-        <Router>
+        <Router className="font-['FiraGO']">
             <Navbar />
             <Routes>
                 <Route path="/" element={<AddedTasks />} />
