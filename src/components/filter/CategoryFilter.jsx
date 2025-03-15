@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
-import FilterOption from "src/components/FilterOption.jsx";
-import FilterDropdown from "src/components/FilterDropdown.jsx";
+import FilterOption from "src/components/filter/FilterOption.jsx";
+import FilterDropdown from "src/components/filter/filter-dropdown/FilterDropdown.jsx";
 
 const CategoryFilter = () => {
     const [openDropdown, setOpenDropdown] = useState(null);

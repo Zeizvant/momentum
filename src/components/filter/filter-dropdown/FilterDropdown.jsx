@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { API_ENDPOINTS, API_TOKEN } from 'src/config/api';
-import DropdownContent from 'src/components/DropdownContent';
-import DropdownFooter from 'src/components/DropdownFooter';
-import SkeletonLoader from 'src/components/SkeletonLoader';
+import { API_ENDPOINTS, API_TOKEN } from 'src/config/api.js';
+import DropdownContent from 'src/components/filter/filter-dropdown/DropdownContent.jsx';
+import DropdownFooter from 'src/components/filter/filter-dropdown/DropdownFooter.jsx';
+import SkeletonLoader from 'src/components/filter/filter-dropdown/SkeletonLoader.jsx';
 
 const FilterDropdown = ({ isOpen, dropdownRef, position, options, selectedOption }) => {
     const [data, setData] = useState([]);

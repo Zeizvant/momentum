@@ -1,5 +1,5 @@
 import React from 'react';
-import Checkbox from './Checkbox';
+import Checkbox from 'src/components/filter/filter-dropdown/Checkbox.jsx';
 
 const DropdownContent = ({ data, selectedItems, handleCheckboxChange, selectedOption }) => (
     <div className='overflow-x-auto'>
