@@ -5,6 +5,7 @@ import FilterDropdown from "src/components/filter/filter-dropdown/FilterDropdown
 const CategoryFilter = () => {
     const [openDropdown, setOpenDropdown] = useState(null);
     const dropdownRef = useRef(null);
+    const [appliedSelectedItems, setAppliedSelectedItems] = useState([]); // Applied state
 
     const handleFilterClick = (index) => {
         setOpenDropdown(openDropdown === index ? null : index);
@@ -13,7 +14,7 @@ const CategoryFilter = () => {
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-                setOpenDropdown(null);
+                setOpenDropdown(null); // Close dropdown
             }
         };
 
@@ -49,6 +50,9 @@ const CategoryFilter = () => {
                 position={dropdownPosition}
                 options={filterOptions}
                 selectedOption={openDropdown}
+                appliedSelectedItems={appliedSelectedItems} // Pass applied state
+                setAppliedSelectedItems={setAppliedSelectedItems} // Pass setter for applied state
+                setOpenDropdown={setOpenDropdown} // Pass setter to close dropdown
             />
         </div>
     );

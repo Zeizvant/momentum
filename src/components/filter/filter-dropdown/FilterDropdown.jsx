@@ -4,11 +4,28 @@ import DropdownContent from 'src/components/filter/filter-dropdown/DropdownConte
 import DropdownFooter from 'src/components/filter/filter-dropdown/DropdownFooter.jsx';
 import SkeletonLoader from 'src/components/filter/filter-dropdown/SkeletonLoader.jsx';
 
-const FilterDropdown = ({ isOpen, dropdownRef, position, options, selectedOption }) => {
+const FilterDropdown = ({
+                            isOpen,
+                            dropdownRef,
+                            position,
+                            options,
+                            selectedOption,
+                            appliedSelectedItems,
+                            setAppliedSelectedItems,
+                            setOpenDropdown,
+                        }) => {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
-    const [selectedItems, setSelectedItems] = useState([]);
+    const [temporarySelectedItems, setTemporarySelectedItems] = useState([]);
+
+
+    useEffect(() => {
+        if (isOpen) {
+            setTemporarySelectedItems(appliedSelectedItems);
+        }
+    }, [isOpen, appliedSelectedItems]);
+
 
     useEffect(() => {
         if (isOpen) {
@@ -31,8 +48,17 @@ const FilterDropdown = ({ isOpen, dropdownRef, position, options, selectedOption
         }
     }, [isOpen, selectedOption, options]);
 
+
     const handleCheckboxChange = (id) => {
-        setSelectedItems((prev) => (prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]));
+        setTemporarySelectedItems((prev) =>
+            prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
+        );
+    };
+
+
+    const handleApplySelection = () => {
+        setAppliedSelectedItems(temporarySelectedItems);
+        setOpenDropdown(null);
     };
 
     return (
@@ -51,13 +77,13 @@ const FilterDropdown = ({ isOpen, dropdownRef, position, options, selectedOption
                 ) : (
                     <DropdownContent
                         data={data}
-                        selectedItems={selectedItems}
+                        selectedItems={temporarySelectedItems}
                         handleCheckboxChange={handleCheckboxChange}
                         selectedOption={options[selectedOption]}
                     />
                 )}
             </div>
-            <DropdownFooter />
+            <DropdownFooter onApply={handleApplySelection} />
         </div>
     );
 };

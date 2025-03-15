@@ -1,39 +1,27 @@
 import React from 'react';
-import MediumIcon from 'src/assets/medium.svg?react'
-import HighIcon from 'src/assets/high.svg?react'
-import LowIcon from 'src/assets/low.svg?react'
 
-const Badge = ({ type }) => {
+const Badge = ( {priority} ) => {
     const styles = {
-        medium: {
-            borderColor: '#FFBE0B',
-            textColor: '#FFBE0B',
-            icon: <MediumIcon />,
-            label: 'საშუალო',
+        2: {
+            colorHex: '#FFBE0B',
         },
-        high: {
-            borderColor: '#FA4D4D',
-            textColor: '#FA4D4D',
-            icon: <HighIcon />,
-            label: 'მაღალი',
+        3: {
+            colorHex: '#FA4D4D',
         },
-        low: {
-            borderColor: '#08A508',
-            textColor: '#08A508',
-            icon: <LowIcon />,
-            label: 'დაბალი',
+        1: {
+            colorHex: '#08A508',
         },
     };
 
-    const { borderColor, textColor, icon, label } = styles[type] || styles.medium;
+    const { colorHex } = styles[priority.id];
 
     return (
         <div
             className='px-[6px] h-[26px] rounded-[4px] border-[0.5px] flex justify-center items-center gap-[4px]'
-            style={{ borderColor, color: textColor }}
+            style={{ colorHex, color: colorHex }}
         >
-            {icon}
-            <span className='text-xs font-medium'>{label}</span>
+            <img src={priority.icon} alt={priority.name} />
+            <span className='text-xs font-medium'>{priority.name}</span>
         </div>
     );
 };

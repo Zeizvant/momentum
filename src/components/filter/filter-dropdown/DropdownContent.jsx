@@ -21,8 +21,8 @@ const DropdownContent = ({ data, selectedItems, handleCheckboxChange, selectedOp
                                 className='w-6 h-6 rounded-full'
                             />
                             <span className='text-[#212529]'>
-                {item.name} {item.surname}
-              </span>
+                                {item.name} {item.surname}
+                            </span>
                         </div>
                     ) : (
                         <span className='text-[#212529]'>{item.name}</span>

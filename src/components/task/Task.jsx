@@ -1,6 +1,9 @@
 import React from 'react';
 import Badge from "src/components/task/Badge.jsx";
 import CommentIcon from 'src/assets/comments.svg?react';
+import formatToGeorgianDate from "src/utils/formatToGeorgianDate.js";
+import convertDepartmentName from "src/utils/convertDepartmentName.js";
+import generateColor from "src/utils/generateColor.js";
 
 const Task = ({
                   priority,
@@ -18,7 +21,6 @@ const Task = ({
         'მზად ტესტირებისთვის': '#FF006E',
         დასრულებული: '#3A86FF',
     };
-
     const borderColor = statusColorMap[status];
 
     return (
@@ -29,14 +31,16 @@ const Task = ({
             <div className='flex flex-col justify-between h-full'>
                 <div className='flex items-center justify-between'>
                     <div className='flex items-center gap-[10px]'>
-                        <Badge type={priority} />
+                        <Badge priority={priority} />
                         <div
-                            className='px-[18.5px] py-[5px] text-xs font-normal bg-[#FF66A8] rounded-[15px] text-white'>
-                            {department}
+                            className='px-[18.5px] py-[5px] text-xs font-normal rounded-[15px] text-white flex justify-center min-w-[88px]'
+                            style={{backgroundColor: generateColor(department)}}
+                        >
+                            {convertDepartmentName(department)}
                         </div>
                     </div>
-                    <div className='text-xs font-normal text-[#212529]'>
-                        {due_date}
+                    <div className='text-xs font-normal text-[#212529] w-[76px]'>
+                        {formatToGeorgianDate(due_date)}
                     </div>
                 </div>
 
