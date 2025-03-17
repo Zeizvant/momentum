@@ -38,7 +38,7 @@ const Filters = () => {
                         appliedSelectedItems[category] && appliedSelectedItems[category].map(item => (
                             <FilterTag
                                 key={`${category}-${item.id}`}
-                                name={item.name}
+                                name={category === 'თანამშრომელი' ? item.name + " " + item.surname : item.name}
                                 onDelete={() => handleDeleteFilter(category, item.id)}
                             />
                         ))

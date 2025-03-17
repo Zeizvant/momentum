@@ -61,7 +61,7 @@ const FilterDropdown = ({
                 return prev.filter(selectedItem => selectedItem.id !== item.id);
             } else {
                 if (isEmployeeCategory) {
-                    return [{ id: item.id, name: item.name }];
+                    return [{ id: item.id, name: item.name, surname: item.surname }];
                 }
                 return [...prev, { id: item.id, name: item.name }];
             }
