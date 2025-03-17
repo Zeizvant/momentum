@@ -83,10 +83,14 @@ const FilterDropdown = ({
     return (
         <div
             ref={dropdownRef}
-            className={`absolute w-[688px] h-[274px] border border-[#8338EC] rounded-[10px] bg-white px-[30px] py-[20px] transition-all duration-300 ease-out ${
+            className={`absolute w-[688px] h-[274px] border border-[#8338EC] rounded-[10px] bg-white px-[30px] py-[20px] transition-all duration-300 ease-out shadow-lg ${
                 isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-[-10px] pointer-events-none'
             }`}
-            style={{ top: position.top, left: position.left }}
+            style={{
+                top: position.top,
+                left: position.left,
+                zIndex: 10
+            }}
         >
             <div className='py-[20px] h-[200px] font-normal'>
                 {loading ? (

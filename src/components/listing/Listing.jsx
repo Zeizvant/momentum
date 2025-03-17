@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import ListingHeader from "src/components/listing/ListingHeader.jsx";
 import Task from "src/components/task/Task.jsx";
 import TaskSkeleton from "src/components/task/TaskSkeleton.jsx";
-import { API_ENDPOINTS ,API_TOKEN } from "src/config/api.js";
+import { API_ENDPOINTS, API_TOKEN } from "src/config/api.js";
 
 const Listing = () => {
     const [tasks, setTasks] = useState([]);
     const [loading, setLoading] = useState(true);
+    const appliedFilters = useSelector((state) => state.filter.appliedSelectedItems);
 
     useEffect(() => {
         const fetchTasks = async () => {
@@ -36,11 +38,30 @@ const Listing = () => {
         { text: "დასრულებული", bgColor: "bg-[#3A86FF]" },
     ];
 
-    const filteredTasks = {
-        1: tasks.filter(task => task.status.id === 1),
-        2: tasks.filter(task => task.status.id === 2),
-        3: tasks.filter(task => task.status.id === 3),
-        4: tasks.filter(task => task.status.id === 4),
+    const filteredTasks = tasks.filter(task => {
+        const departmentFilters = appliedFilters['დეპარტამენტი'] || [];
+        if (departmentFilters.length > 0 && !departmentFilters.some(filter => filter.id === task.department.id)) {
+            return false;
+        }
+
+        const priorityFilters = appliedFilters['პრიორიტეტი'] || [];
+        if (priorityFilters.length > 0 && !priorityFilters.some(filter => filter.id === task.priority.id)) {
+            return false;
+        }
+
+        const employeeFilters = appliedFilters['თანამშრომელი'] || [];
+        if (employeeFilters.length > 0 && !employeeFilters.some(filter => filter.id === task.employee.id)) {
+            return false;
+        }
+
+        return true;
+    });
+
+    const groupedFilteredTasks = {
+        1: filteredTasks.filter(task => task.status.id === 1),
+        2: filteredTasks.filter(task => task.status.id === 2),
+        3: filteredTasks.filter(task => task.status.id === 3),
+        4: filteredTasks.filter(task => task.status.id === 4),
     };
 
     return (
@@ -63,7 +84,7 @@ const Listing = () => {
                                 <TaskSkeleton key={index} />
                             ))
                         ) : (
-                            filteredTasks[statusId].map((task) => (
+                            groupedFilteredTasks[statusId].map((task) => (
                                 <Task
                                     key={task.id}
                                     priority={task.priority}
