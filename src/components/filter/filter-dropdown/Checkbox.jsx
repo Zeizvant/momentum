@@ -1,10 +1,10 @@
 import React from 'react';
 import Tick from 'src/assets/tick.svg?react';
 
-const Checkbox = ({ checked, onChange }) => (
+const Checkbox = ({ checked, onChange, type = 'checkbox' }) => (
     <div className='relative mr-[15px]'>
         <input
-            type='checkbox'
+            type={type}
             checked={checked}
             onChange={onChange}
             className='absolute opacity-0 h-0 w-0'

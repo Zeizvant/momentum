@@ -5,7 +5,6 @@ import FilterDropdown from "src/components/filter/filter-dropdown/FilterDropdown
 const CategoryFilter = () => {
     const [openDropdown, setOpenDropdown] = useState(null);
     const dropdownRef = useRef(null);
-    const [appliedSelectedItems, setAppliedSelectedItems] = useState([]); // Applied state
 
     const handleFilterClick = (index) => {
         setOpenDropdown(openDropdown === index ? null : index);
@@ -44,18 +43,18 @@ const CategoryFilter = () => {
                 ))}
             </div>
 
-            <FilterDropdown
-                isOpen={openDropdown !== null}
-                dropdownRef={dropdownRef}
-                position={dropdownPosition}
-                options={filterOptions}
-                selectedOption={openDropdown}
-                appliedSelectedItems={appliedSelectedItems} // Pass applied state
-                setAppliedSelectedItems={setAppliedSelectedItems} // Pass setter for applied state
-                setOpenDropdown={setOpenDropdown} // Pass setter to close dropdown
-            />
+            {openDropdown !== null && (
+                <FilterDropdown
+                    isOpen={openDropdown !== null}
+                    dropdownRef={dropdownRef}
+                    position={dropdownPosition}
+                    options={filterOptions}
+                    selectedOption={openDropdown}
+                    setOpenDropdown={setOpenDropdown}
+                />
+            )}
         </div>
     );
-}
+};
 
 export default CategoryFilter;

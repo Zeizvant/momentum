@@ -1,7 +1,7 @@
 import React from 'react';
 import Checkbox from 'src/components/filter/filter-dropdown/Checkbox.jsx';
 
-const DropdownContent = ({ data, selectedItems, handleCheckboxChange, selectedOption }) => (
+const DropdownContent = ({ data, selectedItems, handleCheckboxChange, selectedOption, isSingleSelect }) => (
     <div className='overflow-x-auto'>
         <div
             className='grid gap-4 w-max font-normal'
@@ -10,8 +10,9 @@ const DropdownContent = ({ data, selectedItems, handleCheckboxChange, selectedOp
             {data.map((item) => (
                 <label key={item.id} className='flex items-center space-x-2 cursor-pointer'>
                     <Checkbox
-                        checked={selectedItems.includes(item.id)}
-                        onChange={() => handleCheckboxChange(item.id)}
+                        checked={selectedItems.some(selectedItem => selectedItem.id === item.id)}
+                        onChange={() => handleCheckboxChange(item)}
+                        type={isSingleSelect ? 'radio' : 'checkbox'}
                     />
                     {selectedOption === 'თანამშრომელი' ? (
                         <div className='flex items-center space-x-2'>

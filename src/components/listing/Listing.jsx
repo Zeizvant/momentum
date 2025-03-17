@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import ListingHeader from "src/components/listing/ListingHeader.jsx";
 import Task from "src/components/task/Task.jsx";
 import TaskSkeleton from "src/components/task/TaskSkeleton.jsx";
-import { API_TOKEN } from "src/config/api.js";
+import { API_ENDPOINTS ,API_TOKEN } from "src/config/api.js";
 
 const Listing = () => {
     const [tasks, setTasks] = useState([]);
@@ -11,7 +11,7 @@ const Listing = () => {
     useEffect(() => {
         const fetchTasks = async () => {
             try {
-                const response = await fetch('https://momentum.redberryinternship.ge/api/tasks', {
+                const response = await fetch(API_ENDPOINTS.tasks, {
                     headers: { Authorization: API_TOKEN },
                 });
                 if (!response.ok) {
@@ -44,7 +44,7 @@ const Listing = () => {
     };
 
     return (
-        <div className="mt-[68px]">
+        <div>
             <div className="flex justify-between mb-[30px]">
                 {headers.map((header, index) => (
                     <ListingHeader

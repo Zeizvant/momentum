@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { API_ENDPOINTS, API_TOKEN } from 'src/config/api.js';
 import DropdownContent from 'src/components/filter/filter-dropdown/DropdownContent.jsx';
 import DropdownFooter from 'src/components/filter/filter-dropdown/DropdownFooter.jsx';
 import SkeletonLoader from 'src/components/filter/filter-dropdown/SkeletonLoader.jsx';
+import { setAppliedSelectedItems } from 'src/store/filterSlice';
 
 const FilterDropdown = ({
                             isOpen,
@@ -10,22 +12,25 @@ const FilterDropdown = ({
                             position,
                             options,
                             selectedOption,
-                            appliedSelectedItems,
-                            setAppliedSelectedItems,
                             setOpenDropdown,
                         }) => {
+    const dispatch = useDispatch();
+    const appliedSelectedItems = useSelector((state) => state.filter.appliedSelectedItems);
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [temporarySelectedItems, setTemporarySelectedItems] = useState([]);
 
+    const currentCategory = options[selectedOption];
+    const categorySelectedItems = appliedSelectedItems[currentCategory] || [];
+
+    const isEmployeeCategory = currentCategory === 'თანამშრომელი';
 
     useEffect(() => {
         if (isOpen) {
-            setTemporarySelectedItems(appliedSelectedItems);
+            setTemporarySelectedItems(categorySelectedItems);
         }
-    }, [isOpen, appliedSelectedItems]);
-
+    }, [isOpen]);
 
     useEffect(() => {
         if (isOpen) {
@@ -33,7 +38,7 @@ const FilterDropdown = ({
                 setLoading(true);
                 setError(null);
                 try {
-                    const response = await fetch(API_ENDPOINTS[options[selectedOption]], {
+                    const response = await fetch(API_ENDPOINTS[currentCategory], {
                         headers: { Authorization: API_TOKEN },
                     });
                     if (!response.ok) throw new Error('Failed to fetch data');
@@ -46,20 +51,34 @@ const FilterDropdown = ({
             };
             fetchData();
         }
-    }, [isOpen, selectedOption, options]);
+    }, [isOpen, currentCategory]);
 
+    const handleCheckboxChange = (item) => {
+        setTemporarySelectedItems((prev) => {
+            const existingItemIndex = prev.findIndex(selectedItem => selectedItem.id === item.id);
 
-    const handleCheckboxChange = (id) => {
-        setTemporarySelectedItems((prev) =>
-            prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
-        );
+            if (existingItemIndex >= 0) {
+                return prev.filter(selectedItem => selectedItem.id !== item.id);
+            } else {
+                if (isEmployeeCategory) {
+                    return [{ id: item.id, name: item.name }];
+                }
+                return [...prev, { id: item.id, name: item.name }];
+            }
+        });
     };
-
 
     const handleApplySelection = () => {
-        setAppliedSelectedItems(temporarySelectedItems);
+        dispatch(
+            setAppliedSelectedItems({
+                category: currentCategory,
+                items: temporarySelectedItems,
+            })
+        );
         setOpenDropdown(null);
     };
+
+    if (!isOpen) return null;
 
     return (
         <div
@@ -79,7 +98,7 @@ const FilterDropdown = ({
                         data={data}
                         selectedItems={temporarySelectedItems}
                         handleCheckboxChange={handleCheckboxChange}
-                        selectedOption={options[selectedOption]}
+                        selectedOption={currentCategory}
                     />
                 )}
             </div>
