@@ -2,7 +2,7 @@ import Logo from '../assets/logo.svg?react';
 
 import AddCustomerButton from "src/components/buttons/AddCustomerButton.jsx";
 import AddTaskButton from "src/components/buttons/AddTaskButton.jsx";
-export default function Navbar() {
+const Navbar = () => {
     return (
         <nav className='w-full max-w-[1920px] h-[100px] flex justify-between items-center px-[120px]'>
             <Logo/>
@@ -13,3 +13,5 @@ export default function Navbar() {
         </nav>
     );
 }
+
+export default Navbar
