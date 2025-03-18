@@ -4,8 +4,8 @@ import Checkbox from 'src/components/filter/filter-dropdown/Checkbox.jsx';
 const DropdownContent = ({ data, selectedItems, handleCheckboxChange, selectedOption, isSingleSelect }) => (
     <div className='overflow-x-auto'>
         <div
-            className='grid gap-4 w-max font-normal'
-            style={{ gridTemplateRows: 'repeat(4, minmax(0, 1fr))', gridAutoFlow: 'column' }}
+            className='grid gap-[10px] w-max font-normal'
+            style={{ gridTemplateRows: 'repeat(4, minmax(0, 1fr))', gridAutoFlow: 'column', columnGap: '40px' }}
         >
             {data.map((item) => (
                 <label key={item.id} className='flex items-center space-x-2 cursor-pointer'>
