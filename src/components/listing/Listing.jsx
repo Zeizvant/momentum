@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import ListingHeader from "src/components/listing/ListingHeader.jsx";
 import Task from "src/components/task/Task.jsx";
 import TaskSkeleton from "src/components/task/TaskSkeleton.jsx";
@@ -9,6 +10,7 @@ const Listing = () => {
     const [tasks, setTasks] = useState([]);
     const [loading, setLoading] = useState(true);
     const appliedFilters = useSelector((state) => state.filter.appliedSelectedItems);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchTasks = async () => {
@@ -37,6 +39,10 @@ const Listing = () => {
         { text: "მზად ტესტირებისთვის", bgColor: "bg-[#FF006E]" },
         { text: "დასრულებული", bgColor: "bg-[#3A86FF]" },
     ];
+
+    const handleTaskClick = (taskId) => {
+        navigate(`/task/${taskId}`);
+    };
 
     const filteredTasks = tasks.filter(task => {
         const departmentFilters = appliedFilters['დეპარტამენტი'] || [];
@@ -94,7 +100,8 @@ const Listing = () => {
                                     name={task.name}
                                     description={task.description}
                                     avatar={task.employee.avatar}
-                                    commentsCount={8}
+                                    commentsCount={task.total_comments}
+                                    onClick={() => handleTaskClick(task.id)}
                                 />
                             ))
                         )}
