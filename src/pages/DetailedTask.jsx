@@ -129,15 +129,15 @@ const DetailedTask = () => {
     };
 
     if (loading) {
-        return <div>Loading...</div>;
+        return <div className='w-full max-w-[1920px] px-[120px] mt-[40px] font-[FiraGO]'>Loading...</div>;
     }
 
     if (error) {
-        return <div>Error: {error}</div>;
+        return <div className='w-full max-w-[1920px] px-[120px] mt-[40px] font-[FiraGO]'>Error: {error}</div>;
     }
 
     if (!task) {
-        return <div>No task found</div>;
+        return <div className='w-full max-w-[1920px] px-[120px] mt-[40px] font-[FiraGO]'>No task found</div>;
     }
 
     return (
