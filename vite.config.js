@@ -6,7 +6,7 @@ import path from 'path';
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: 'https://github.com/Zeizvant/momentum',
+  base: '/momentum/',
   plugins: [
       react(),
       tailwindcss(),
