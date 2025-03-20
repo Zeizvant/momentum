@@ -14,6 +14,7 @@ const Task = ({
                   description,
                   avatar,
                   commentsCount,
+                  onClick
               }) => {
     const statusColorMap = {
         დასაწყები: '#F7BC30',
@@ -27,6 +28,7 @@ const Task = ({
         <div
             className='w-[381px] h-[217px] rounded-[10px] border text-xl font-medium cursor-pointer p-[20px]'
             style={{ borderColor }}
+            onClick={onClick}
         >
             <div className='flex flex-col justify-between h-full'>
                 <div className='flex items-center justify-between'>
