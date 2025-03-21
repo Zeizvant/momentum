@@ -52,22 +52,26 @@ const EmployeeModal = ({ isOpen, onClose }) => {
         >
             <div className='flex flex-col justify-between h-[440px]'>
                 <div className='flex justify-between'>
-                    <TextField
-                        label="სახელი"
-                        name="firstName"
-                        value={formData.firstName}
-                        onChange={handleInputChange}
-                        validation={validation.firstName}
-                        validationRules={firstNameValidationRules}
-                    />
-                    <TextField
-                        label="გვარი"
-                        name="lastName"
-                        value={formData.lastName}
-                        onChange={handleInputChange}
-                        validation={validation.lastName}
-                        validationRules={lastNameValidationRules}
-                    />
+                    <div className='w-[384px]'>
+                        <TextField
+                            label="სახელი"
+                            name="firstName"
+                            value={formData.firstName}
+                            onChange={handleInputChange}
+                            validation={validation.firstName}
+                            validationRules={firstNameValidationRules}
+                        />
+                    </div>
+                    <div className='w-[384px]'>
+                        <TextField
+                            label="გვარი"
+                            name="lastName"
+                            value={formData.lastName}
+                            onChange={handleInputChange}
+                            validation={validation.lastName}
+                            validationRules={lastNameValidationRules}
+                        />
+                    </div>
                 </div>
 
                 <ImageUploader
