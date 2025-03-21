@@ -21,8 +21,11 @@ const filterSlice = createSlice({
                 );
             }
         },
+        clearAllFilters: (state) => {
+            state.appliedSelectedItems = {};
+        },
     },
 });
 
-export const { setAppliedSelectedItems, deleteFilter } = filterSlice.actions;
+export const { setAppliedSelectedItems, deleteFilter, clearAllFilters } = filterSlice.actions;
 export default filterSlice.reducer;
