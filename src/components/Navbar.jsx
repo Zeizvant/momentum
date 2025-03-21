@@ -15,10 +15,10 @@ const Navbar = () => {
     return (
         <>
             <nav className='w-full max-w-[1920px] h-[100px] flex justify-between items-center px-[120px]'>
-                <Logo onClick={() => navigate("/")}/>
+                <Logo className='cursor-pointer' onClick={() => navigate("/")}/>
                 <div className='flex items-center gap-[40px]'>
                     <AddEmployeeButton onClick={handleOpenModal} />
-                    <AddTaskButton />
+                    <AddTaskButton onClick={() => navigate("/create-task")} />
                 </div>
             </nav>
             <EmployeeModal isOpen={isModalOpen} onClose={handleCloseModal} />

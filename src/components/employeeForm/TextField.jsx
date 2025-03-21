@@ -32,13 +32,13 @@ const TextField = ({
     };
 
     return (
-        <div className='flex flex-col w-[384px] gap-[3px]'>
+        <div className='flex flex-col w-full gap-[3px]'>
             <div className='text-[#343A40] text-sm font-medium'>{label}*</div>
             <input
                 name={name}
                 value={value}
                 onChange={onChange}
-                className={`h-[42px] border ${getBorderColor()} rounded-[6px] p-[10px] focus:outline-none mb-[5px] ${!validation.touched && 'focus:border-[#8338EC]'}`}
+                className={`bg-white h-[42px] border ${getBorderColor()} rounded-[6px] p-[10px] focus:outline-none mb-[5px] ${!validation.touched && 'focus:border-[#8338EC]'}`}
                 type='text'
             />
             {validationRules.map((rule, index) => (
