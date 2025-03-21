@@ -19,7 +19,7 @@ const DropdownContent = ({ data, selectedItems, handleCheckboxChange, selectedOp
                             <img
                                 src={item.avatar}
                                 alt={`${item.name} ${item.surname}`}
-                                className='w-6 h-6 rounded-full'
+                                className='w-6 h-6 rounded-full object-cover'
                             />
                             <span className='text-[#212529]'>
                                 {item.name} {item.surname}

@@ -48,7 +48,7 @@ const TaskDetails = ({ task }) => {
                         <div className='w-[260px] flex gap-[12px] h-[48px]'>
                             <div className='flex justify-center items-center'>
                                 <img src={task.employee.avatar} alt='employee avatar'
-                                     className='w-[32px] h-[32px] rounded-full' />
+                                     className='w-[32px] h-[32px] rounded-full object-cover' />
                             </div>
                             <div className='flex flex-col'>
                                 <div className='font-light text-[11px] text-[#474747]'>

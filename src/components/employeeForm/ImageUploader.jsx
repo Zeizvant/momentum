@@ -29,7 +29,7 @@ const ImageUploader = ({
                         <img
                             src={imagePreview}
                             alt="Preview"
-                            className='w-[88px] h-[88px] rounded-full'
+                            className='w-[88px] h-[88px] rounded-full object-cover'
                         />
                         <DeleteImageButton className='cursor-pointer absolute right-0 bottom-[-5px]' onClick={onDeleteImage} />
                     </div>

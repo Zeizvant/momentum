@@ -41,7 +41,7 @@ const Task = ({
                             {convertDepartmentName(department)}
                         </div>
                     </div>
-                    <div className='text-xs font-normal text-[#212529] w-[76px]'>
+                    <div className='text-xs font-normal text-[#212529] w-[80px]'>
                         {formatToGeorgianDate(due_date)}
                     </div>
                 </div>
@@ -58,7 +58,7 @@ const Task = ({
                 </div>
 
                 <div className='flex justify-between items-center'>
-                    <img src={avatar} alt='employee avatar' className='w-[24px] h-[24px] rounded-full' />
+                    <img src={avatar} alt='employee avatar' className='w-[24px] h-[24px] rounded-full object-cover' />
                     <div className='flex items-center gap-[4px] text-sm font-normal text-[#212529]'>
                         <CommentIcon />
                         {commentsCount}

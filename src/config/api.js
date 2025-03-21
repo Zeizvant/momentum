@@ -7,4 +7,4 @@ export const API_ENDPOINTS = {
     taskComments: (id) => `https://momentum.redberryinternship.ge/api/tasks/${id}/comments`
 };
 
-export const API_TOKEN = 'Bearer 9e6ee5c1-4ed3-43be-85f2-6b2211142f9d';
+export const API_TOKEN = 'Bearer 9e7c790a-d20a-480b-800f-41cf804caad9';
